@@ -1,0 +1,47 @@
+# ============================================================
+# Traffic Scope 示例配置（单一文件，含三种范围输入方式）
+# 使用：cp configs/example.yaml configs/config.yaml 后按需修改
+#       （工具默认读取 configs/config.yaml，复制后即可直接运行）
+# ============================================================
+
+# ------------------------------------------------------------
+# 研究范围 study_area —— 三种方式三选一，取消对应注释即可：
+#   方式 A：行政区划（admin，需 6 位 adcode）
+#   方式 B：矩形框（bbox，经纬度 [xmin, ymin, xmax, ymax]，坐标系可选）
+#   方式 C：本地矢量文件（file，shp / GeoJSON / KML / GeoPackage）
+# 下方默认启用「方式 B：bbox」（上海杨浦滨江一带，约 2.5×2 km）。
+# ------------------------------------------------------------
+study_area:
+
+  # --- 方式 A：行政区划（admin，需 6 位 adcode）---
+  # type: admin
+  # adcode: "310110"          # 6 位行政区划代码（例：上海杨浦区）
+  # name: 杨浦区              # 可选，缺省用 DataV 返回的名称
+
+  # --- 方式 B：矩形框（bbox，WGS84 经纬度 [xmin, ymin, xmax, ymax]）---
+  type: bbox
+  bbox: [121.520, 31.260, 121.545, 31.280]
+  crs: wgs84              # 可选，wgs84（默认）/gcj02/bd09
+
+  # --- 方式 C：本地矢量文件（file，shp / GeoJSON / KML / GeoPackage）---
+  # type: file
+  # path: examples/study_area.geojson   # 相对路径以运行目录为基准
+  # layer: 0                  # 可选，GeoPackage 等多层文件可指定层
+
+traffic:                     # 网页端路况瓦片采集（无需 AK）
+  provider: amap            # 数据源 baidu（百度）| amap（高德）
+  level: auto                # 瓦片级别，或 auto 按面积自适应（百度 12-18、高德 10-18）
+  qps: 5                     # 保守限速（合规：仅限自用研究，勿高频批量）
+  max_retries: 3
+  clip: true                 # 镶嵌图/矢量是否裁剪到范围内
+
+output:
+  dir: runs
+  formats: [gpkg, geojson]   # gpkg / geojson / shp
+  raster: true               # 输出镶嵌 GeoTIFF + PNG
+  keep_raw_png: true         # 存档原始瓦片 PNG（离线重放/复核用）
+  html: true                 # 生成交互地图
+
+viz:
+  enabled: true
+  basemap: tianditu          # tianditu（需 keys.txt 配 tianditu_tk）；osm 用 CartoDB（建议配 carto key）

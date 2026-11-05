@@ -1,0 +1,10 @@
+# 本工具采集百度/高德网页端路况瓦片，无需任何地图 AK。
+
+# 天地图 tk（可选，交互地图默认底图；缺省退回 CartoDB Positron）
+# 申请：https://console.tianditu.gov.cn/
+# 使用：cp configs/keys.txt.example configs/keys.txt 后填入；切勿提交 keys.txt
+tianditu_tk =
+
+# CartoDB 底图 key（carto= 前缀行；免费申请 https://carto.com/basemaps/apikey/）
+# 无 key 时 CartoDB 瓦片带 "API key required" 水印，填后即消失
+carto =

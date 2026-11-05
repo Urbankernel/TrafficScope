@@ -1,0 +1,36 @@
+# 密钥与环境
+configs/keys.txt
+config.local.js
+
+# 个人运行配置（README 引导用户从 example 复制生成）
+configs/config.yaml
+configs/my_run.yaml
+
+# 运行产物
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# 测试与工具缓存
+.pytest_cache/
+.ruff_cache/
+
+# 运行时缓存（leafmap/requests 等）
+.cache/
+cache/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 文档
+docs/
+.workbuddy/

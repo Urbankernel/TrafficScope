@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "traffic-scope"
+version = "0.9.0"
+description = "按空间范围（行政区划/矢量文件/bbox）采集中国地图网页端实时路况（百度/高德，渲染同源，无需 AK），产出镶嵌 GeoTIFF、矢量化路段与交互地图"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "siwei" }]
+keywords = ["baidu-maps", "amap", "traffic", "gis", "raster-tiles", "urban-planning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "shapely>=2.0",
+    "numpy>=1.24",
+    "requests>=2.31",
+    "PyYAML>=6.0",
+    "geopandas>=0.14",
+    "rasterio>=1.3",
+    "matplotlib>=3.7",
+    "Pillow>=10.0",
+    "leafmap>=0.30",
+    "folium>=0.15",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+traffic-scope = "traffic_scope.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
